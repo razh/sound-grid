@@ -1,9 +1,9 @@
 'use strict';
 
-angular.module('soundGridApp', [])
-  .config(function ($routeProvider) {
+angular.module( 'soundGridApp', [] )
+  .config( function( $routeProvider ) {
     $routeProvider
-      .when('/', {
+      .when( '/', {
         templateUrl: 'views/main.html',
         controller: 'MainCtrl'
       })
