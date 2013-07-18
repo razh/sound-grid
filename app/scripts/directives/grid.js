@@ -37,6 +37,8 @@ angular.module( 'soundGridApp' )
               });
             }
           }
+
+          scope.createNotes();
         }
 
         angular.element( $window ).bind( 'resize', function() {

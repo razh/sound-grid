@@ -17,6 +17,8 @@ angular.module( 'soundGridApp' )
     };
 
     $scope.grid = [];
+
+    $scope.notes = [];
     $scope.noteIndex = 0;
     $scope.noteInterval = 250;
 
@@ -54,20 +56,35 @@ angular.module( 'soundGridApp' )
     var degreeCount = audio.scale.degrees.length;
 
     $scope.play = function() {
-      var scale = audio.scale,
-          degree, octave,
-          freq, voice;
-
       $scope.grid.forEach( function( row, rowIndex ) {
         if ( row[ $scope.noteIndex ].on ) {
-          degree = rowIndex % degreeCount;
-          octave = Math.floor( rowIndex / degreeCount );
-
-          freq = scale.getFrequency( degree, 110, octave );
-          voice = new audio.Voice( freq );
-          voice.connect( audio.audiolet.output );
+          $scope.notes[ rowIndex ].play();
         }
       });
+    };
+
+    $scope.createNotes = function() {
+      $scope.notes.forEach(function( note ) {
+        note.disconnect();
+      });
+
+      $scope.notes = [];
+      var audioContext = audio.audioContext,
+          scale = audio.scale,
+          degree, octave,
+          freq, note, noteIndex;
+
+      for ( var i = 0; i < $scope.dimensions.y; i++ ) {
+        noteIndex = $scope.dimensions.y - i - 1;
+        degree = noteIndex % degreeCount;
+        octave = Math.floor( noteIndex / degreeCount );
+
+        freq = scale.getFrequency( degree, 110, octave );
+        note = new audio.Note( freq );
+        note.connect( audioContext.destination );
+
+        $scope.notes.push( note );
+      }
     };
 
     $timeout( function playNextNote() {

@@ -3,7 +3,7 @@
 angular.module( 'soundGridApp' )
   .service( 'audio', function audio() {
 
-    var audiolet = new Audiolet( 44100, 2 );
+    var audioContext = new webkitAudioContext();
 
     // Scales.
     function MajorPentatonicScale() {
@@ -12,37 +12,54 @@ angular.module( 'soundGridApp' )
 
     extend( MajorPentatonicScale, Scale );
 
-
-    var attack = 0.01,
-        release = 0.5;
-
     var scale = new MajorPentatonicScale();
 
-    function Voice( frequency ) {
-      AudioletGroup.call( this, audiolet, 0, 1 );
+    var attack = 0.01,
+        release = 0.2;
 
-      this.sine = new Sine( audiolet, frequency );
 
-      this.gain = new Gain( audiolet );
-      this.env = new PercussiveEnvelope( audiolet, 1, attack, release,
-        function() {
-          this.audiolet.scheduler.addRelative( 0, this.remove.bind( this ) );
-        }.bind( this ) );
+    /**
+     * Each row has a a note object.
+     * ONly one output.
+     */
+    function Note( freq ) {
+      this.frequency = freq;
 
-      this.envMulAdd = new MulAdd( audiolet, 0.3, 0 );
+      this.attack = attack;
+      this.release = release;
 
-      this.sine.connect( this.gain );
-      this.gain.connect( this.outputs[0] );
+      this.gain = audioContext.createGainNode();
+      this.gain.gain.value = 0;
 
-      this.env.connect( this.envMulAdd );
-      this.envMulAdd.connect( this.gain, 0, 1 );
+      this.oscillator = audioContext.createOscillator();
+      this.oscillator.frequency.value = this.frequency;
+      this.oscillator.type = 'sine';
+
+      this.oscillator.connect( this.gain );
+      this.oscillator.start(0);
     }
 
-    extend( Voice, AudioletGroup );
+    Note.prototype.play = function() {
+      var currentTime = audioContext.currentTime;
+      this.gain.gain.setValueAtTime( 0, currentTime );
+      this.gain.gain.linearRampToValueAtTime( 1, currentTime + this.attack );
+      this.gain.gain.linearRampToValueAtTime( 0, currentTime + this.attack + this.release );
+      return this;
+    };
+
+    Note.prototype.connect = function( node ) {
+      this.gain.connect( node );
+      return this;
+    };
+
+    Note.prototype.disconnect = function() {
+      this.gain.disconnect(0); // Disconnect the only output.
+      return this;
+    };
 
     return {
-      audiolet: audiolet,
+      audioContext: audioContext,
       scale: scale,
-      Voice: Voice
+      Note: Note
     };
   });
