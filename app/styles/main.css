@@ -4853,7 +4853,7 @@ a.label:hover, a.label:focus, a.badge:hover, a.badge:focus {
   box-sizing: border-box; }
 
 body {
-  background: black; }
+  background: #222; }
 
 .grid {
   position: absolute;
@@ -4879,7 +4879,7 @@ input[type="checkbox"] {
   input[type="checkbox"]:checked {
     background-color: white;
     outline: none; }
-  input[type="checkbox"]:active {
+  input[type="checkbox"]:focus {
     outline: none; }
   input[type="checkbox"] .playing {
     background: #f7856e;

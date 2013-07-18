@@ -4,7 +4,7 @@ $size: 50px;
 $spacing: 10px;
 
 body {
-  background: black;
+  background: #222;
 }
 
 .grid {
@@ -49,7 +49,7 @@ input[type="checkbox"] {
     outline: none;
   }
 
-  &:active {
+  &:focus {
     outline: none;
   }
 
