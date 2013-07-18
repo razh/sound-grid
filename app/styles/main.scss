@@ -35,12 +35,16 @@ input[type="checkbox"] {
 
   margin: 0;
 
-  transition: all 0.3s ease-in-out;
+  transition: all 0.2s ease-in-out;
 
   background: gray;
   box-shadow: inset 0 0 10px black;
 
   border-radius: $spacing;
+
+  &:focus {
+    outline: none;
+  }
 
   // On.
   &:checked {
@@ -48,11 +52,7 @@ input[type="checkbox"] {
     outline: none;
   }
 
-  &:focus {
-    outline: none;
-  }
-
-  .playing {
+  &:checked.playing {
     background: hsl(10, 90%, 70%);
     box-shadow:
       inset 0 0 30px hsl(10, 90%, 40%),

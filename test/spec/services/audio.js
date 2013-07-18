@@ -1,18 +1,18 @@
 'use strict';
 
-describe('Service: audio', function () {
+describe( 'Service: audio', function() {
 
   // load the service's module
-  beforeEach(module('soundGridApp'));
+  beforeEach( module( 'soundGridApp' ) );
 
   // instantiate service
   var audio;
-  beforeEach(inject(function (_audio_) {
+  beforeEach( inject( function( _audio_ ) {
     audio = _audio_;
   }));
 
-  it('should do something', function () {
-    expect(!!audio).toBe(true);
+  it( 'should do something', function() {
+    expect( !!audio ).toBe( true );
   });
 
 });

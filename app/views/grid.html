@@ -5,7 +5,8 @@
         ng-model="cell.on"
         ng-mousedown="toggle( $parent.$index, $index )"
         ng-mouseover="dragToggle( $parent.$index, $index )"
-        ng-checked="grid[ $parent.$index ][ $index ].on"/>
+        ng-checked="grid[ $parent.$index ][ $index ].on"
+        ng-class="{ 'playing': isPlaying( $index ) }"/>
     </div>
   </div>
 </div>

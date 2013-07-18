@@ -6838,22 +6838,22 @@ input[type="checkbox"] {
   width: 60px;
   height: 60px;
   margin: 0;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.2s ease-in-out;
   background: gray;
   box-shadow: inset 0 0 10px black;
   border-radius: 5px;
 }
-/* line 46, main.scss */
+/* line 45, main.scss */
+input[type="checkbox"]:focus {
+  outline: none;
+}
+/* line 50, main.scss */
 input[type="checkbox"]:checked {
   background-color: white;
   outline: none;
 }
-/* line 51, main.scss */
-input[type="checkbox"]:focus {
-  outline: none;
-}
 /* line 55, main.scss */
-input[type="checkbox"] .playing {
+input[type="checkbox"]:checked.playing {
   background: #f7856e;
   box-shadow: inset 0 0 30px #c2290a, 0 0 30px red, 0 0 40px red;
 }
