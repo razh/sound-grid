@@ -1,7 +1,12 @@
 <div class="grid-container" ng-mousedown="onMouseDown()" ng-mouseup="onMouseUp()">
   <div class="row" ng-repeat="row in grid">
     <div class="cell" ng-repeat="column in row">
-      <input type="checkbox" ng-model="cell.on" ng-mouseover="toggle( $parent.$index, $index )" ng-checked="grid[ $parent.$index ][ $index ].on"/>
+      <input type="checkbox"
+        ng-model="cell.on"
+        ng-mousedown="toggle( $parent.$index, $index )"
+        ng-mouseover="dragToggle( $parent.$index, $index )"
+        ng-checked="grid[ $parent.$index ][ $index ].on"/>
     </div>
   </div>
 </div>
+

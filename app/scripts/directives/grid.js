@@ -6,11 +6,11 @@ angular.module( 'soundGridApp' )
       templateUrl: './views/grid.html',
       restrict: 'C',
       link: function postLink( scope, element, attrs ) {
-        var size    = 50,
-            spacing = 10;
+        var size    = 60,
+            spacing = 2 * 5;
 
-        var elementWidth  = element.prop( 'offsetWidth'  ) - 2 * spacing,
-            elementHeight = element.prop( 'offsetHeight' ) - 2 * spacing;
+        var elementWidth  = element.prop( 'offsetWidth'  ),
+            elementHeight = element.prop( 'offsetHeight' );
 
         var columnCount = Math.floor( elementWidth  / ( size + spacing ) ),
             rowCount    = Math.floor( elementHeight / ( size + spacing ) );

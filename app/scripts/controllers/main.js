@@ -14,10 +14,6 @@ angular.module( 'soundGridApp' )
     $scope.grid = [];
 
     $scope.toggle = function( row, column ) {
-      if ( !$scope.mouse.down ) {
-        return;
-      }
-
       var currentRow = $scope.grid[ row ];
       if ( !currentRow ) {
         return;
@@ -26,6 +22,12 @@ angular.module( 'soundGridApp' )
       var cell = currentRow[ column ];
       if ( cell ) {
         cell.on = !cell.on;
+      }
+    };
+
+    $scope.dragToggle = function( row, column ) {
+      if ( $scope.mouse.down ) {
+        $scope.toggle( row, column );
       }
     };
 
