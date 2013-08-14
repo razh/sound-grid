@@ -1,13 +1,10 @@
 <div class="grid-container" ng-mousedown="onMouseDown()" ng-mouseup="onMouseUp()">
   <div class="row" ng-repeat="row in grid">
-    <div class="cell" ng-repeat="column in row">
+    <div class="cell" ng-repeat="cell in row">
       <input type="checkbox"
         ng-model="cell.on"
-        ng-mousedown="toggle( $parent.$index, $index )"
         ng-mouseenter="dragToggle( $parent.$index, $index )"
-        ng-checked="grid[ $parent.$index ][ $index ].on"
         ng-class="{ 'playing': isPlaying( $index ) }"/>
     </div>
   </div>
 </div>
-

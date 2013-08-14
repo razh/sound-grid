@@ -74,6 +74,7 @@ angular.module( 'soundGridApp' )
           degree, octave,
           freq, note, noteIndex;
 
+      // Create a note for each row.
       for ( var i = 0; i < $scope.dimensions.y; i++ ) {
         noteIndex = $scope.dimensions.y - i - 1;
         degree = noteIndex % degreeCount;
@@ -88,6 +89,7 @@ angular.module( 'soundGridApp' )
     };
 
     $timeout( function playNextNote() {
+      // Increment column.
       $scope.noteIndex = ( $scope.noteIndex + 1 ) % $scope.dimensions.x;
       $scope.play();
 
