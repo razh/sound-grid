@@ -21,6 +21,14 @@ angular.module( 'soundGridApp' )
           var columnCount = Math.floor( elementWidth  / ( size + spacing ) ),
               rowCount    = Math.floor( elementHeight / ( size + spacing ) );
 
+          var remainderWidth  = elementWidth  - ( columnCount * ( size + spacing ) ),
+              remainderHeight = elementHeight - ( rowCount    * ( size + spacing ) );
+
+          element.css({
+            left: 0.5 * remainderWidth  + 'px',
+            top:  0.5 * remainderHeight + 'px'
+          });
+
           scope.dimensions.y = rowCount;
           scope.dimensions.x = columnCount;
 
